@@ -47,22 +47,6 @@ open({
     })
   }
 
-  
-
-  // const authMiddleWare = (req, res, next) => {
-  //   const token = req.headers.authorization
-  //   const secretkey = 'tiltxdhaha'
-  //   if (!token) {
-  //     return res.status(401).json({ message: 'tokena ne ale' })
-  //   } try {
-  //     const decoded = jwt.verify(token, secretkey)
-
-  //     next()
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
-
   const generateToken = (email) => {
     return jwt.sign({ username: email.username }, secretkey, { expiresIn: '1h' })
   }
@@ -94,11 +78,6 @@ open({
     }
     return res.json({ nickname, email, password, token });
   });
-  // app.post('/people/exit', async (res,req) => {
-  //   await db.run(`Update People set token ="${token}" where email = "${email}"`), (res) => {
-  //     return res.json({message: 'Вы покинули церковь и пошли кушать свинину в мечети '})
-  //   }
-  // })
   //.......addTeam......................
   app.post('/profile/team',authMiddleWare, async (req, res) => {
     const row = { teamName, captain, game } = req.body;
@@ -159,20 +138,7 @@ open({
       res.json({ message: "Пройдите Регистрацию" })
     }
   });
-  // app.post('/people/exit', (err, res) => {
-  //   const exit = async (req, res) => {
-  //     const email = await db.all(`SELECT * FROM People WHERE email = "${email}"`)
-  //     const token = await db.all(`SELECT * FROM People WHERE token = "${token}"`)
-  //     if (email.length = 0 || logData.email === `${email}`) {
-  //       await db.run(`Update People set token ="${token}" where email = "${email}"`)
-  //     } 
-  //     return res.json({message: 'Вы покинули церковь и пошли кушать свинину в мечети '})
-  //   }
-  //   exit()
-  //   if (err) {
-  //     return res.status(401).json({message: 'nea'})
-  //   } 
-  // })
+ 
 
   app.use((req, res, next) => {
     if (req.headers.authorization) {
@@ -199,4 +165,3 @@ app.listen(3000, () => {
 
 
 
-// expres nodemon sqlite sqlite3 установить
